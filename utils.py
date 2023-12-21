@@ -178,29 +178,6 @@ def get_single_yr_df(var, year, data_file, demo_file):
 
     return merged_df
 
-
-# def get_multi_yr_df(var_df, output):
-#     # For each year/data file combination, get the data and stack by year.
-#     for i in range(len(var_df)):
-#         var = var_df['Variable Name'][i]
-#         year = var_df['Year'][i]
-#         data_file = var_df['Data File Name'][i]
-#         demo_file = var_df['Demo File Name'][i]
-#
-#         update = f'Downloading data for: {year} {var} {data_file} {demo_file}'
-#         print(update)
-#         output = output + "\n" + update
-#
-#         if i == 0:
-#             multi_yr_df = get_single_yr_df(var, year, data_file, demo_file)
-#         else:
-#             single_yr_df = get_single_yr_df(var, year, data_file, demo_file)
-#             multi_yr_df = pd.concat([multi_yr_df, single_yr_df])
-#     print('Download complete')
-#     output = output + "\n" + 'Download complete'
-#
-#     return multi_yr_df, output
-
 def get_multi_yr_df(var_df, container):
     # For each year/data file combination, get the data and stack by year.
     i = 0
