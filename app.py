@@ -63,7 +63,7 @@ if st.session_state.data_loaded:
     easy_name = st.session_state.selected_variable.split(':')[1].strip()
 
     # Analysis selection
-    analysis_options = ['Summary Statistics', 'Histograms', 'Line Graph']
+    analysis_options = ['Summary Statistics', 'Compare Histograms', 'Line Graph']
     selected_analysis = st.selectbox('Select an analysis', analysis_options)
 
     # Make second dropdown choices
@@ -75,9 +75,14 @@ if st.session_state.data_loaded:
     with col1:
         selected_mean = st.selectbox('Select a mean type', mean_types)
         selected_min = st.text_input('Min', value=None)
+        if selected_analysis == 'Compare Histograms':
+            selected_survey = st.selectbox('Select a survey year', multi_yr_df['Year'].unique())
+
     with col2:
         selected_domain = st.selectbox('Select a demographic category', domains)
         selected_max = st.text_input('Max', value=None)
+        if selected_analysis == 'Compare Histograms':
+            selected_bins = st.text_input('Number of bins', value=40)
 
     # Create a 'Submit' button and on click, display the results
     if st.button('Submit'):
