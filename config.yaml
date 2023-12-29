@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    kcaron:
+      email: kevintcaron@gmail.com
+      name: Kevin Caron
+      password: $2b$12$Z35gShzVH44CEyxjqeuaZuv5OQT9RU2eiW7hMZEzwL9woG9SlUZN2 # To be replaced with hashed password 'abc'
+    aadams:
+      email: aaronhadams13@gmail.com
+      name: Aaron Adams
+      password: $2b$12$sown1/QPQFX4L6ePC8EuhOlJ8n3uWt5pvQg6f.Zkdc2tgiZbDLT/O # To be replaced with hashed password 'def'
+cookie:
+  expiry_days: 0
+  key: random_signature_key # Must be string
+  name: random_cookie_name
+preauthorized:
+  emails:
+  - kcaron2@gmail.com
