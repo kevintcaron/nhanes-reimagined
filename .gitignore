@@ -1,4 +1,6 @@
 
 # Ignore log files
-
+stream_app/
+.idea/
+_pycache_/
 

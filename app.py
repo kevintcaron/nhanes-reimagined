@@ -108,6 +108,7 @@ if st.session_state["authentication_status"]:
             selected_max = st.text_input('Max', value=None)
             if selected_analysis == 'Compare Histograms':
                 selected_bins = st.text_input('Number of bins', value=40)
+                log = st.checkbox('Log scale')
 
         # Create a 'Submit' button and on click, display the results
         if st.button('Submit'):
@@ -121,9 +122,19 @@ if st.session_state["authentication_status"]:
                                                min_value=selected_min)
                     st.write(
                         f'{easy_name} {selected_mean} Means by {selected_domain} (Min: {selected_min}, Max: {selected_max})')
-                    st.write(df_means)
-                elif selected_analysis == 'Histograms':
-                    st.write('Histograms')
+
+                    st.dataframe(df_means, hide_index=True)
+                elif selected_analysis == 'Compare Histograms':
+                    with st.spinner('Creating Histograms...'):
+                        utils.compare_frequency(multi_yr_df,
+                                                easy_name,
+                                                 selected_survey,
+                                                 var,
+                                                 selected_domain,
+                                                 selected_bins,
+                                                 log,
+                                                 selected_min,
+                                                 selected_max)
                 elif selected_analysis == 'Line Graph':
                     df_means = utils.get_means(multi_yr_df,
                                                var,

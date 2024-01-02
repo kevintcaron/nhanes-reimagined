@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 import time
 from samplics.estimation import TaylorEstimator
 import streamlit as st
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+from math import ceil
 
 
 def get_vars():
@@ -421,3 +424,194 @@ def sort_means(df_means):
     df_means.reset_index(drop=True, inplace=True)
 
     return df_means
+
+## Functions for comparing histograms ##
+
+def get_weighted_df(unweighted_df, variable, weight, domain=None):
+    """Computes % population at each unique value of variable for single survey period
+
+    Params:
+    unweighted_df - unweighted_df for single survey period
+    variable - varaible of interest as string (e.g. 'LBXCOT')
+    weight - specified sample weights to use (e.g. 'WTMEC2YR')
+    domain - optional param for specifiying result split by subgroups
+
+    Returns:
+    df of % of population at each unique value of selected variable
+    """
+    var_prop = TaylorEstimator("proportion")
+
+    if domain == None:
+        var_prop.estimate(y=unweighted_df[variable],
+                          samp_weight=unweighted_df[weight],
+                          stratum=unweighted_df["SDMVSTRA"],
+                          psu=unweighted_df["SDMVPSU"],
+                          remove_nan=True)
+    else:
+        var_prop.estimate(y=unweighted_df[variable],
+                          samp_weight=unweighted_df[weight],
+                          stratum=unweighted_df["SDMVSTRA"],
+                          psu=unweighted_df["SDMVPSU"],
+                          domain=unweighted_df[domain],
+                          remove_nan=True)
+
+    df = var_prop.to_dataframe()
+    df.reset_index(inplace=True)
+
+    return df
+
+
+def rescale_x(a):
+    axis_vals = [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000]
+    min_x = min(axis_vals, key=lambda x: abs(x - np.min(a)))
+    max_x = min(axis_vals, key=lambda x: abs(x - np.max(a)))
+    scale = [x for x in axis_vals if x >= min_x]
+    scale = [x for x in scale if x <= max_x]
+    return scale
+
+
+def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
+    bins = int(bins)
+    w_df = get_weighted_df(df, variable, weight, domain)
+
+    num_plots = len(w_df['_domain'].unique())
+    rows = ceil(num_plots / 2)
+    cols = 2
+    domains = w_df['_domain'].unique()
+    fig, axes = plt.subplots(nrows=rows, ncols=cols, sharex=True, sharey=True, figsize=(10, 10 / 2 * rows))
+    colors = ['#5cc1ba', '#fd6906', '#3cb8e3', '#fde702', '#fb9fd1']
+
+
+    i = 0
+    row = 0
+    col = 0
+    for group in w_df['_domain'].unique():
+        df_p = w_df[w_df['_domain'] == group]
+        a = df_p['_level'].to_list()
+        b = df_p['_estimate'].to_list()  # list of percentages (y vals)
+
+
+        if limit != 0:
+            a = [x for x in a if x >= limit]
+            print(a)
+
+        if rows > 1:
+            if log == True:
+                axes[row, col].hist(df_p['_level'],
+                                    weights=df_p['_estimate'] * 100,
+                                    bins=np.logspace(np.log10(np.nanmin(a)), np.log10(np.nanmax(a)), bins + 1),
+                                    edgecolor='black',
+                                    color=colors[i])
+
+                scale = rescale_x(a)
+                # Rescale x axis, set tick locations, and set x tick labels
+                axes[row, col].set_xscale("log")
+                axes[row, col].set_xticks(scale)
+                axes[row, col].set_xticklabels(scale)
+
+            else:
+                axes[row, col].hist(df_p['_level'],
+                                    weights=df_p['_estimate'] * 100,
+                                    bins=np.linspace(np.nanmin(a), np.nanmax(a), bins + 1),
+                                    edgecolor='black',
+                                    color=colors[i])
+
+            # Create Labels
+            x_label = easy_name
+
+            # Create legend
+            handles = [Rectangle((0, 0), 1, 1, color=colors[i])]
+
+            labels = [domains[i] + ' ' + x_label]
+            axes[row, col].legend(handles, labels, edgecolor='black')
+
+            # Create Title and x/y labels
+            axes[row, col].set_title(
+                'Frequency Distribution of\n' + domains[i] + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+            axes[row, col].set_xlabel(x_label)
+            axes[row, col].set_ylabel('Percent of Population')
+            axes[row, col].tick_params('x', labelbottom=True)
+            axes[row, col].tick_params('y', labelleft=True)
+
+            i += 1
+            col = 1
+            if i % 2 == 0:
+                col = 0
+                row += 1
+
+
+            # don't display empty ax
+            if i >= num_plots:
+                axes[row, col].remove()
+        else:
+            if log == True:
+                axes[col].hist(df_p['_level'],
+                               weights=df_p['_estimate'] * 100,
+                               bins=np.logspace(np.log10(np.nanmin(a)), np.log10(np.nanmax(a)), bins + 1),
+                               edgecolor='black',
+                               color=colors[i])
+                scale = rescale_x(a)
+
+                # Rescale x axis, set tick locations, and set x tick labels
+                axes[col].set_xscale("log")
+                axes[col].set_xticks(scale)
+                axes[col].set_xticklabels(scale)
+
+
+            else:
+                axes[col].hist(df_p['_level'],
+                               weights=df_p['_estimate'] * 100,
+                               bins=np.linspace(np.nanmin(a), np.nanmax(a), bins + 1),
+                               edgecolor='black',
+                               color=colors[i])
+
+            # Create Labels
+            x_label = easy_name
+
+            # Create legend
+            handles = [Rectangle((0, 0), 1, 1, color=colors[i])]
+
+            labels = [domains[i] + ' ' + x_label]
+            axes[col].legend(handles, labels, edgecolor='black')
+
+            # Create Title and x/y labels
+            axes[col].set_title(
+                'Frequency Distribution of\n' + str(domains[i]) + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+            axes[col].set_xlabel(x_label)
+            axes[col].set_ylabel('Percent of Population')
+            axes[col].tick_params('x', labelbottom=True)
+            axes[col].tick_params('y', labelleft=True)
+
+            i += 1
+            col = 1
+            if i % 2 == 0:
+                col = 0
+                row += 1
+
+            # don't display empty ax
+            if i > num_plots:
+                axes[col].remove()
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+def compare_frequency(df_all,
+                      easy_name,
+                      Year='2001-2002',
+                      Variable='Cotinine, Serum (ng/mL)',
+                      Domain='Gender',
+                      Bins=40,
+                      Log=False,
+                      Lower_Limit=0,
+                      Upper_Limit=0):
+    df = df_all[df_all['Year'] == Year]
+    Weights = 'WTMEC2YR'
+
+    if Lower_Limit == None:
+        Lower_Limit = 0
+    if Upper_Limit == None:
+        Upper_Limit = 0
+
+    domain = get_domain(Domain)
+    plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, float(Lower_Limit))
