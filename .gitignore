@@ -1,6 +1,7 @@
 
 # Ignore log files
 stream_app/
-.idea/
-_pycache_/
 
+# Ignore all files in the .idea folder and all files in the _pycache_ folder.
+.idea/*
+_pycache_/*
