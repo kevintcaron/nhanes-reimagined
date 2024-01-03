@@ -472,6 +472,7 @@ def rescale_x(a):
 
 def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
     bins = int(bins)
+    limit = float(limit)
     w_df = get_weighted_df(df, variable, weight, domain)
 
     num_plots = len(w_df['_domain'].unique())
@@ -480,7 +481,6 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
     domains = w_df['_domain'].unique()
     fig, axes = plt.subplots(nrows=rows, ncols=cols, sharex=True, sharey=True, figsize=(10, 10 / 2 * rows))
     colors = ['#5cc1ba', '#fd6906', '#3cb8e3', '#fde702', '#fb9fd1']
-
 
     i = 0
     row = 0
