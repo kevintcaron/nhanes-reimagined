@@ -493,7 +493,6 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 
         if limit != 0:
             a = [x for x in a if x >= limit]
-            print(a)
 
         if rows > 1:
             if log == True:
@@ -603,15 +602,24 @@ def compare_frequency(df_all,
                       Domain='Gender',
                       Bins=40,
                       Log=False,
-                      Lower_Limit=0,
-                      Upper_Limit=0):
+                      Lower_Limit=0.0,
+                      Upper_Limit=0.0):
+    df_all = recode_df_domains(df_all)
     df = df_all[df_all['Year'] == Year]
     Weights = 'WTMEC2YR'
 
-    if Lower_Limit == None:
-        Lower_Limit = 0
-    if Upper_Limit == None:
-        Upper_Limit = 0
+    if Lower_Limit is None:
+        Lower_Limit = 0.0
+        Lower_Limit = float(Lower_Limit)
+
+    if Upper_Limit is None:
+        Upper_Limit = 0.0
+        Upper_Limit = float(Upper_Limit)
 
     domain = get_domain(Domain)
-    plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, float(Lower_Limit))
+
+    print(Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
+    print(type(Variable), type(easy_name), type(Year), type(Weights), type(domain), type(Bins), type(Log),
+          type(Lower_Limit))
+
+    plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
