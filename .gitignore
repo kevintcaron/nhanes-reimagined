@@ -2,6 +2,8 @@
 # Ignore log files
 stream_app/
 documentation/nhanes/
+.idea/
+__pychache__/
 
 # Ignore all files in the .idea folder and all files in the _pycache_ folder.
 .idea/*
