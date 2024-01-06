@@ -608,18 +608,23 @@ def compare_frequency(df_all,
     df = df_all[df_all['Year'] == Year]
     Weights = 'WTMEC2YR'
 
-    if Lower_Limit is None:
+    if Lower_Limit is None or Lower_Limit == '0' or Lower_Limit == '0.0' or Lower_Limit == '':
         Lower_Limit = 0.0
         Lower_Limit = float(Lower_Limit)
 
-    if Upper_Limit is None:
+    if Upper_Limit is None or Upper_Limit == '0' or Upper_Limit == '0.0' or Upper_Limit == '':
         Upper_Limit = 0.0
         Upper_Limit = float(Upper_Limit)
 
     domain = get_domain(Domain)
 
-    print(Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
-    print(type(Variable), type(easy_name), type(Year), type(Weights), type(domain), type(Bins), type(Log),
-          type(Lower_Limit))
-
-    plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
+    if Domain == 'Total Population':
+        st.write('Sorry: "Total Population" is not yet supported. Please try another example.')
+    else:
+        try:
+            if Upper_Limit == 0.0:
+                plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
+            else:
+                st.write('Sorry: "Max" value is not yet supported. Please try another example.')
+        except:
+            st.write('Sorry: your request could not be completed. Please try another example.')

@@ -8,6 +8,10 @@ credentials:
       email: aaronhadams13@gmail.com
       name: Aaron Adams
       password: $2b$12$sown1/QPQFX4L6ePC8EuhOlJ8n3uWt5pvQg6f.Zkdc2tgiZbDLT/O # To be replaced with hashed password 'def'
+    nhanes.admin:
+      email: wrn0@cdc.gov
+      name: NHANES Admin
+      password: $2b$12$v0u6jg.nkj.AcKCStlAV4.gM78tDW.wvrbIZ7NNRHMyctm5b6yFcq # To be replaced with hashed password 'biomarker'
 cookie:
   expiry_days: 0
   key: random_signature_key # Must be string
