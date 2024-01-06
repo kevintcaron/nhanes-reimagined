@@ -1,6 +1,7 @@
 
 # Ignore log files
 stream_app/
+documentation/nhanes/
 
 # Ignore all files in the .idea folder and all files in the _pycache_ folder.
 .idea/*
@@ -12,3 +13,11 @@ __pycache__/*.pyo
 
 # Ignore workspace.xml file in .idea folder
 .idea/workspace.xml
+*.pyd
+*.pyc
+*.xml
+*.pyd
+*.pyi
+.gitattributes
+*.pyi
+*.pyi
