@@ -619,12 +619,12 @@ def compare_frequency(df_all,
     domain = get_domain(Domain)
 
     if Domain == 'Total Population':
-        st.write('Sorry: "Total Population" is not yet supported. Please try another example.')
+        st.write('Sorry: "Total Population" is not currently supported. Please try another example.')
     else:
         try:
             if Upper_Limit == 0.0:
                 plot_domain_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
             else:
-                st.write('Sorry: "Max" value is not yet supported. Please try another example.')
+                st.write('Sorry: "Max" value is not currently supported. Please try another example.')
         except:
             st.write('Sorry: your request could not be completed. Please try another example.')
