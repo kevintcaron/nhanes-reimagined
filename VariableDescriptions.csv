@@ -1,0 +1,333 @@
+Variable,SAS_Label,English_Text
+SEQN,Respondent sequence number,Respondent sequence number.
+RIDEXMON,Six month time period,"Six month time period when the examination was performed - two categories: November 1 through April 30, May 1 through October 31."
+RIAGENDR,Gender,Gender of the participant.
+RIDAGEYR,Age in years at screening,Age in years of the participant at the time of screening. Individuals 80 and over are topcoded at 80 years of age.
+RIDAGEMN,Age in months at screening - 0 to 24 mos,Age in months of the participant at the time of screening. Reported for persons aged 24 months or younger at the time of exam (or screening if not examined).
+RIDAGEEX,Age in Months at Exam - Recode,Best age in months at date of examination for individuals under 80 years of age at the time of MEC exam.
+RIDRETH1,Race/Hispanic origin,Recode of reported race and Hispanic origin information
+DMQMILIT,Served in the US Armed Forces,Did {you/SP} ever serve in the Armed Forces of the United States?
+DMDCITZN,Citizenship status,{Are you/Is SP} a citizen of the United States? [Information about citizenship is being collected by the U.S. Public Health Service to perform health related research. Providing this information is voluntary and is collected under the authority of the Public Health Service Act. There will be no effect on pending immigration or citizenship petitions.]
+DMDYRSUS,Length of time in US,Length of time the participant has been in the US.
+DMDEDUC3,Education level - Children/Youth 6-19,What is the highest grade or level of school {you have/SP has} completed or the highest degree {you have/s/he has} received?
+DMDEDUC2,Education level - Adults 20+,What is the highest grade or level of school {you have/SP has} completed or the highest degree {you have/s/he has} received?
+DMDSCHOL,Now attending school?,{Are you/Is SP} now . . .
+DMDMARTL,Marital status,Marital status
+DMDHHSIZ,Total number of people in the Household,Total number of people in the Household
+INDFMPIR,Ratio of family income to poverty,A ratio of family income to poverty guidelines.
+RIDEXPRG,Pregnancy status at exam,Pregnancy status for females between 20 and 44 years of age at the time of MEC exam.
+WTINT2YR,Full sample 2 year interview weight,Full sample 2 year interview weight.
+WTMEC2YR,Full sample 2 year MEC exam weight,Full sample 2 year MEC exam weight.
+SDMVPSU,Masked variance pseudo-PSU,Masked variance unit pseudo-PSU variable for variance estimation
+SDMVSTRA,Masked variance pseudo-stratum,Masked variance unit pseudo-stratum variable for variance estimation
+HID010,Covered by health insurance,The (first/next) questions are about health insurance. {Are you/Is SP} covered by health insurance or some other kind of health care plan?  [Include health insurance obtained through employment or purchased directly as well as government programs like Medicare and Medicaid that provide medical care or help pay medical bills.]
+HID030A,Covered by private insurance,{Are you/Is SP} covered by private insurance?
+HID030B,Covered by Medicare,{Are you/Is SP} covered by Medicare?
+HID030D,Covered by other government insurance,{Are you/Is SP} covered by other government insurance?
+HID040,Dental coverage included,Does the insurance {you have/SP has} cover any part of dental care?
+HUQ010,General health condition,{First/Next} I have some general questions about {your/SP's} health.  Would you say {your/SP's} health in general is . . .
+HUQ090,Seen mental health professional/past yr,"During the past 12 months, that is since {DISPLAY CURRENT MONTH} of {DISPLAY LAST YEAR}, {have you/has SP} seen or talked to a mental health professional such as a psychologist, psychiatrist, psychiatric nurse or clinical social worker about {your/his/her} health?"
+HOD060,How many years family lived in home,How many years {have you/has your family} lived at this address?
+HOQ065,"Home owned, bought, rented, other","Is this {mobile home/house/apartment} owned, being bought, rented, or occupied by some other arrangement by {you/you or someone else in your family}?"
+HOQ070,Source of tap water,"What is the source of tap water in this home?  Is it a private or public water company, a private or public well, or something else?"
+MCQ010,Ever been told you have asthma,The following questions are about different medical conditions. Has a doctor or other health professional ever told {you/SP} that {you have/s/he/SP has} asthma (az-ma)?
+MCQ080,Doctor ever said you were overweight,Has a doctor or other health professional ever told {you/SP} that {you were/s/he/SP was} overweight?
+MCQ160C,Ever told you had coronary heart disease,Has a doctor or other health professional ever told {you/SP}  that {you/s/he} . . .had coronary heart disease?
+MCQ160E,Ever told you had heart attack,Has a doctor or other health professional ever told {you/SP}  that {you/s/he} . . .had a heart attack (also called myocardial infarction)?
+MCQ160F,Ever told you had a stroke,Has a doctor or other health professional ever told {you/SP}  that {you/s/he} . . .had a stroke?
+MCQ220,Ever told you had cancer or malignancy,{Have you/Has SP} ever been told by a doctor or other health professional that {you/s/he} had cancer or a malignancy (ma-lig-nan-see) of any kind?
+OCQ260,Description of job/work situation,"Looking at the card, which of these best describes this job or work situation?"
+PAD320,Moderate activity over past 30 days,"[Over the past 30 days], did {you/SP} do moderate activities for at least 10 minutes that cause only light sweating or a slight to moderate increase in breathing or heart rate?  Some examples are brisk walking, bicycling for pleasure, golf, and dancing ."
+PAD440,Muscle strengthening activities,"Over the past 30 days, did {you/SP} do any physical activities specifically designed to strengthen {your/his/her} muscles such as lifting weights, push-ups or sit-ups?  Include all such activities even if you have mentioned them before."
+URXUMA,"Albumin, urine (ug/mL)","Albumin, urine (ug/mL)"
+URXUCR,"Creatinine, urine (mg/dL)","Creatinine, urine (mg/dL)"
+LBXBPB,Blood lead (ug/dL),Blood lead (ug/dL)
+LBDBPBSI,Blood lead (umol/L),Blood lead (umol/L)
+LBXBCD,Blood cadmium (ug/L),Blood cadmium (ug/L)
+LBDBCDSI,Blood cadmium (nmol/L),Blood cadmium (nmol/L)
+LBXFER,Ferritin (ng/mL),Ferritin (ng/mL)
+LBDFERSI,Ferritin (ug/L),Ferritin (ug/L)
+LBXTHG,"Blood mercury, total (ug/L)","Blood mercury, total (ug/L)"
+LBDTHGSI,"Blood mercury, total (nmol/L)","Blood mercury, total (nmol/L)"
+LBXIHG,"Mercury, inorganic (ug/L)","Inorganic mercury, blood (ug/L)"
+LBDIHGSI,"Mercury, inorganic (nmol/L)","Mercury, inorganic (nmol/L)"
+LBXCOT,"Cotinine, Serum (ng/mL)","Cotinine, Serum (ng/mL)"
+URXUHG,Urine Mercury (ug/L),Urine Mercury (ug/L)
+URXUGC,Urinary Gonorrhea,Urinary Gonorrhea
+URXUCL,"Chlamydia, Urine","Chlamydia, Urine"
+LBXTR,Triglyceride (mg/dL),Triglyceride (mg/dL)
+LBDTRSI,Triglyceride (mmol/L),Triglyceride (mmol/L)
+LBDLDL,"LDL-Cholesterol, Friedewald (mg/dL)","LDL-Cholesterol, Friedewald equation (mg/dL).
+
+LBDLDL = (LBXTC-(LBDHDD + LBXTR/5), round to 0 decimal places) for LBXTR less than 400 mg/dL, and missing for LBXTR greater than 400 mg/dL.
+
+LBDHDD from public release file HDL_J"
+LBDLDLSI,"LDL-Cholesterol, Friedewald (mmol/L)","LDL-Cholesterol, Friedewald equation (mmol/L)"
+LBXTC,Total Cholesterol (mg/dL),Total Cholesterol (mg/dL)
+LBDTCSI,Total Cholesterol (mmol/L),Total Cholesterol (mmol/L)
+LBXWBCSI,White blood cell count (1000 cells/uL),White blood cell count (1000 cells/uL)
+LBXLYPCT,Lymphocyte percent (%),Lymphocyte percent (%)
+LBXMOPCT,Monocyte percent (%),Monocyte percent (%)
+LBXNEPCT,Segmented neutrophils percent (%),Segmented neutrophils percent (%)
+LBXEOPCT,Eosinophils percent (%),Eosinophils percent (%)
+LBXBAPCT,Basophils percent (%),Basophils percent (%)
+LBDLYMNO,Lymphocyte number (1000 cells/uL),Lymphocyte number (1000 cells/uL)
+LBDMONO,Monocyte number (1000 cells/uL),Monocyte number (1000 cells/uL)
+LBDNENO,Segmented neutrophils num (1000 cell/uL),Segmented neutrophils number (1000 cell/uL)
+LBDEONO,Eosinophils number (1000 cells/uL),Eosinophils number (1000 cells/uL)
+LBDBANO,Basophils number (1000 cells/uL),Basophils number (1000 cells/uL)
+LBXRBCSI,Red blood cell count (million cells/uL),Red blood cell count (million cells/uL)
+LBXHGB,Hemoglobin (g/dL),Hemoglobin (g/dL)
+LBXHCT,"Hydroxycotinine, Serum (ng/mL)","Hydroxycotinine, Serum (ng/mL)"
+LBXMCVSI,Mean cell volume (fL),Mean cell volume (fL)
+LBXMCHSI,Mean cell hemoglobin (pg),Mean cell hemoglobin (pg)
+LBXMC,Mean Cell Hgb Conc. (g/dL),Mean cell hemoglobin concentration (g/dL)
+LBXRDW,Red cell distribution width (%),Red cell distribution width (%)
+LBXPLTSI,Platelet count (1000 cells/uL),Platelet count (1000 cells/uL)
+LBXMPSI,Mean platelet volume (fL),Mean platelet volume (fL)
+PHQ020,Coffee or tea with cream or sugar?,Coffee or tea with cream or sugar?  [Include milk or non-dairy creamers.]
+PHACOFHR,Coffee/tea fast time (hours),The time (in hours) since the examinee last drank coffee or tea with cream or sugar.
+PHACOFMN,Coffee/tea fast time (minutes),The time (in minutes) since the examinee last drank coffee or tea with cream or sugar.
+PHQ030,"Alcohol, such as beer, wine, or liquor?","Alcohol, such as beer, wine, or liquor?"
+PHAALCHR,Alcohol fast time (hours),"The time (in hours) the examinee last drank alcohol such as beer, wine, or liquor."
+PHAALCMN,Alcohol fast time (minutes),"The time (in minutes) the examinee last drank alcohol such as beer, wine, or liquor."
+PHQ040,"Gum, mints, lozenges or cough drops","Gum, breath mints, lozenges or cough drops, or other cough or cold remedies?"
+PHAGUMHR,"Gum, mints cough drops fast time (hours)","The time (in hours) the examinee last had gum, breath mints, lozenges or cough drops, or other cough or cold remedies."
+PHAGUMMN,"Gum, mints, cough fast time (minutes)","The time (in minutes) the examinee last had gum, breath mints, lozenges or cough drops, or other cough or cold remedies."
+PHQ050,"Antacids, laxatives, or anti-diarrheals?","Antacids, laxatives, or anti-diarrheals?"
+PHAANTHR,"Antacids, laxatives fast time (hours)","The time (in hours) the examinee last had antacids, laxatives or anti-diarrheals."
+PHAANTMN,"Antacids, laxatives fast time (minutes)","The time (in minutes) the examinee last had antacids, laxatives or anti-diarrheals."
+PHQ060,Dietary supplements?,Dietary supplements such as vitamins and minerals? [Include multivitamins and single nutrient supplements.]
+PHASUPHR,Dietary supplements fast time (hours),The time (in hours) the examinee last had dietary supplements such as vitamins and minerals.
+PHASUPMN,Dietary supplements fast time (minutes),The time (in minutes) the examinee last had dietary supplements such as vitamins and minerals.
+PHAFSTHR,"Total length of ""food fast,"" hours",The time (in hours) between when the examinee last ate or drank anything other than water and the time of the venipuncture.
+PHAFSTMN,"Total length of  ""food fast,"" minutes",The time (in minutes) between when the examinee last ate or drank anything other than water and the time of the venipuncture.
+PHDSESN,Session in which SP was examined,Session in which SP was examined
+URXUBA,"Barium, urine (ug/L)","Barium, urine (ug/L)"
+URXUBE,"Beryllium, urine (ug/L)","Beryllium, urine (ug/L)"
+URXUCO,"Cobalt, urine (ug/L)","Cobalt, urine (ug/L)"
+URXUCS,"Cesium, urine (ug/L)","Cesium, urine (ug/L)"
+URXUMO,"Molybdenum, urine (ug/L)","Molybdenum, urine (ug/L)"
+URXUPB,"Lead, urine (ug/L)","Lead, urine (ug/L)"
+URXUPT,"Platinum, urine (ug/L)","Platinum, urine (ug/L)"
+URXUSB,"Antimony, urine (ug/L)","Antimony, urine (ug/L)"
+URXUTL,"Thallium, urine (ug/L)","Thallium, urine (ug/L)"
+URXUTU,"Tungsten, urine (ug/L)","Tungsten, urine (ug/L)"
+URXATZ,Atrazine mercapturate (ug/L) result,Atrazine mercapturate (ug/L) result
+LBXGLU,Fasting Glucose (mg/dL),Fasting Glucose (mg/dL)
+LBXIN,Insulin (uU/mL),Insulin (uU/mL)
+LBXSAL,"Albumin, refrigerated serum (g/dL)","Albumin, refrigerated serum (g/dL)"
+LBDSALSI,"Albumin, refrigerated serum (g/L)","Albumin, refrigerated serum(g/L)"
+LBXSAPSI,Alkaline Phosphatase (ALP) (IU/L),Alkaline Phosphatase (ALP) (IU/L)
+LBXSBU,Blood Urea Nitrogen (mg/dL),Blood Urea Nitrogen (mg/dL)
+LBDSBUSI,Blood Urea Nitrogen (mmol/L),Blood Urea Nitrogen (mmol/L)
+LBXSCA,Total Calcium (mg/dL),Total Calcium (mg/dL)
+LBDSCASI,Total Calcium (mmol/L),Total Calcium (mmol/L)
+LBXSCH,"Cholesterol, refrigerated serum (mg/dL)","Total Cholesterol, refrigerated serum (mg/dL)"
+LBDSCHSI,"Cholesterol, refrigerated serum (mmol/L)","Total Cholesterol, refrigerated serum (mmol/L)"
+LBXSC3SI,Bicarbonate (mmol/L),Bicarbonate (mmol/L)
+LBXSGTSI,Gamma Glutamyl Transferase (GGT) (IU/L),Gamma Glutamyl Transferase (GGT) (IU/L)
+LBXSGL,"Glucose, refrigerated serum (mg/dL)","Glucose, refrigerated serum (mg/dL)"
+LBDSGLSI,"Glucose, refrigerated serum (mmol/L)","Glucose, refrigerated serum (mmol/L)"
+LBXSIR,"Iron, refrigerated serum (ug/dL)","Iron, refrigerated serum (ug/dL)"
+LBDSIRSI,"Iron, refrigerated serum (umol/L)","Iron, refrigerated serum (umol/L)"
+LBXSLDSI,Lactate Dehydrogenase (LDH) (IU/L),Lactate Dehydrogenase (LDH) (IU/L)
+LBXSPH,Phosphorus (mg/dL),Phosphorus (mg/dL)
+LBDSPHSI,Phosphorus (mmol/L),Phosphorus (mmol/L)
+LBXSTB,Total Bilirubin (mg/dL),Total Bilirubin (mg/dL)
+LBDSTBSI,Total Bilirubin (umol/L),Total Bilirubin (umol/L)
+LBXSTP,Total Protein (g/dL),Total Protein (g/dL)
+LBDSTPSI,Total Protein (g/L),Total Protein (g/L)
+LBXSTR,"Triglycerides, refrig serum (mg/dL)","Triglycerides, refrigerated serum (mg/dL)"
+LBDSTRSI,"Triglycerides, refrig serum (mmol/L)","Triglycerides, refrigerated serum (mmol/L)"
+LBXSUA,Uric acid (mg/dL),Uric acid (mg/dL)
+LBDSUASI,Uric acid (umol/L),Uric acid (umol/L)
+LBXSCR,"Creatinine, refrigerated serum (mg/dL)","Creatinine, refrigerated serum (mg/dL)"
+LBDSCRSI,"Creatinine, refrigerated serum (umol/L)","Creatinine, refrigerated serum (umol/L)"
+LBXSNASI,Sodium (mmol/L),Sodium (mmol/L)
+LBXSKSI,Potassium (mmol/L),Potassium (mmol/L)
+LBXSCLSI,Chloride (mmol/L),Chloride (mmol/L)
+LBXSOSSI,Osmolality (mmol/Kg),Osmolality (mmol/Kg)
+LBXSGB,Globulin (g/dL),Globulin (g/dL)
+LBDSGBSI,Globulin (g/L),Globulin (g/L)
+VTQ200A,Store paints or fuels inside home?,Do you currently store paints or fuels inside your home? Include your basement and attached garage.
+OCD150,Type of work done last week,(SP Interview Version) In this part of the survey I will ask you questions about {your/SP's} work experience. Which of the following {were you/was SP} doing last week . . . (Family Interview Version) The next questions are about {your/NON-SP HEAD'S/NON- SP SPOUSE'S} current job or business.  Which of the following {were you/was} {NON-SP HEAD/NON-SP SPOUSE} doing last week . . .
+PAD480,"Daily hours of TV, video or computer use","Now I will ask about TV watching or computer use.  Over the past 30 days, on a typical day how much time altogether did {you/SP} spend on a typical day sitting and watching TV or videos or using a computer outside of work?  Would you say . . ."
+RIDAGGRP,Age group,Age group
+URXUIO,"Iodine, urine (ug/L)","Iodine, urine (ug/L)"
+URXUUR,"Uranium, urine (ug/L)","Uranium, urine (ug/L)"
+KIQ115,Infection or inflammation of prostate,{Do you/does SP} have an infection or inflammation of the prostate gland at the present time?
+KIQ185,Rectal exam in the last 7 days,{Have you/Has SP} had a rectal exam in the last 7 days?
+KIQ195,Cystoscopy in the last 4 weeks,{Have you/Has SP} had a cystoscopy in the last 4 weeks? (Cystoscopy is an internal examination of the prostate and bladder using a flexible tube-like instrument with a lens inserted through the penis.)
+KIQ201,Diagnosed with prostate cancer,{Have you/Has SP} ever been told by a doctor or health professional that {you/he} had prostate cancer?
+KIQ221,Age at diagnosis of prostate cancer,How old {were you/was SP} when {you were/he was} first told that {you/he} had prostate cancer?
+KIQ241,Ever had prostate surgery,{Have you/Has SP} ever had surgery on {your/his} prostate?
+KIQ301,Radiation treatment for prostate cancer,{Have you/Has SP} ever had radiation treatments for prostate cancer?
+KIQ311,Taken medicines for prostate cancer,{Have you/Has SP} ever taken prescribed medicines for prostate cancer?
+LBXACR,Acrylamide (pmol/g Hb),Acrylamide (pmol/g Hb)
+LBXGLY,Glycideamide (pmol/g Hb),Glycideamide (pmol/g Hb)
+WTSA2YR,Subsample A Weights,Subsample A Weights
+URXUAS,"Arsenic, Total - Urine (ug/L)","Arsenic, Total - Urine (ug/L)"
+URXUAS3,Urinary Arsenous acid (ug/L),Urinary Arsenous acid (ug/L)
+URXUAS5,Urinary Arsenic acid (ug/L),Urinary Arsenic acid (ug/L)
+URXUAB,Urinary Arsenobetaine (ug/L),Urinary Arsenobetaine (ug/L)
+URXUAC,Urinary Arsenocholine (ug/L),Urinary Arsenocholine (ug/L)
+URXUDMA,Urinary Dimethylarsinic acid (ug/L),Urinary Dimethylarsinic acid (ug/L)
+URXUMMA,Urinary Monomethylarsonic acid (ug/L),Urinary Monomethylarsonic acid (ug/L)
+URXUTM,Urinary Trimethylarsine Oxide (ug/L),Urinary Trimethylarsine Oxide (ug/L)
+LBDHDDSI,Direct HDL-Cholesterol (mmol/L),Direct HDL-Cholesterol (mmol/L)
+SSEBV,Epstein Barr Virus result,Epstein Barr Virus result
+SSEBVIND,Epstein Barr Virus index,Epstein Barr Virus index
+URXUCD,"Cadmium, urine (ug/L)","Cadmium, urine (ug/L)"
+LBDGLUSI,Fasting Glucose (mmol/L),Fasting Glucose (mmol/L)
+LBDINSI,Insulin (pmol/L),Insulin (pmol/L)
+VTQ210,Attached garage?,Does your home have an attached garage?
+VTQ220,Private well?,Is the source of water for your home from a private well?
+VTQ230A,Toilet bowl deodorizers,{Do you/Does she/Does he} use toilet bowl deodorizers inside {your/her/his} home?
+VTQ230B,Moth balls or crystals?,{Do you/Does she/Does he} use moth balls or crystals inside {your/her/his} home?
+VTQ240A,Pump gas into a car or motor vehicle?,"Now I am going to ask you a few questions about {your/SP's} activities over the last three days.  This means today, yesterday, or the day before yesterday.  In the last three days, did {you/she/he} pump gas into a car or other motor vehicle {yourself/herself/himself}?"
+VTQ240B,How long ago did you pump gas?,"How long ago, in hours, did {you/she/he} pump gas into a car?"
+VTQ250A,Spend time at swimming pool?,"In the last three days, did {you/she/he} spend any time at a swimming pool, in a hot tub, or in a steam room?"
+VTQ250B,How long ago at swimming pool?,"How long ago, in hours, has it been since {you/she/he} spent time in a swimming pool, in a hot tub, or in a steam room?"
+VTQ260A,Visit a dry cleaning shop?,"In the last three days, did {you/she/he} visit a dry cleaning shop or wear clothes that had been dry-cleaned within the last week?"
+VTQ260B,Spend 10 minutes near cigarette smoke?,"In the last three days, did {you/she/he} spend 10 or more minutes near a person who was smoking a cigarette, cigar, or pipe?"
+VTQ270A,Take a hot shower?,"In the last three days, did {you/she/he} take a hot shower or bath for five minutes or longer?"
+VTQ270B,How long since hot shower?,"How long ago, in hours, has it been since {your/SP's} last shower or hot bath?"
+VTQ280A,Breathe fumes from paints?,"In the last three days, did {you/she/he} breathe fumes from any of the following:  Paints?"
+VTQ280B,Breathe fumes from degreasing cleaners?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Degreasing cleaners?"
+VTQ280C,Breathe fumes from diesel fuel?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Diesel fuel or kerosene?"
+VTQ280D,Breathe fumes from paint thinner?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Paint thinner, brush cleaner, or furniture stripper?"
+VTQ280E,Breathe fumes from drycleaning fluid?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Drycleaning fluid or spot remover?"
+VTQ280F,Breathe fumes from fingernail polish?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Fingernail polish or fingernail polish remover?"
+VTQ280G,Breathe fumes from glue?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Glues or adhesives used for hobbies or crafts?"
+VTQ280H,Breathe fumes from varnish?,"[In the last three days, did {you/she/he} breathe fumes from any of the following:]  Varnish or stain?"
+DMDFMSIZ,Total number of people in the Family,Total number of people in the Family
+DPQ010,Have little interest in doing things,"Over the last 2 weeks, how often have you been bothered by the following problems: little interest or pleasure in doing things?  Would you say..."
+DPQ020,"Feeling down, depressed, or hopeless","[Over the last 2 weeks, how often have you been bothered by the following problems:] feeling down, depressed, or hopeless?"
+DPQ030,Trouble sleeping or sleeping too much,"[Over the last 2 weeks, how often have you been bothered by the following problems:] trouble falling or staying asleep, or sleeping too much?"
+DPQ050,Poor appetite or overeating,"[Over the last 2 weeks, how often have you been bothered by the following problems:] poor appetite or overeating?"
+DPQ060,Feeling bad about yourself,"[Over the last 2 weeks, how often have you been bothered by the following problems:] feeling bad about yourself - or that you are a failure or have let yourself or your family down?"
+DPQ090,Thought you would be better off dead,"[Over the last 2 weeks, how often have you been bothered by the following problems:] Thoughts that you would be better off dead or of hurting yourself in some way?"
+OCD231,Industry group code: current job,"What kind of business or industry is this? (For example: a TV or, radio management, retail shoe store, state labor department, farm.)"
+OCQ265,Which best describes hours worked?,Which of the following best describes the hours {you/SP} usually {work/works} at {your/his/her} main job or business?
+SMQ040,Do you now smoke cigarettes?,{Do you/Does SP} now smoke cigarettes?
+URXUMS,"Albumin, urine (mg/L)","Albumin, urine (mg/L)"
+URXCRS,"Creatinine, urine (umol/L)","Creatinine, urine (umol/L)"
+ETHNICTY,Ethnicity - Recode,Ethnicity - Recode
+LBDHDD,Direct HDL-Cholesterol (mg/dL),Direct HDL-Cholesterol (mg/dL)
+LBXAPB,Apolipoprotein (B) (mg/dL),Apolipoprotein (B) (mg/dL)
+LBDAPBSI,Apolipoprotein (B) (g/L),Apolipoprotein (B) (g/L)
+URXBUP,Butyl paraben (ng/mL),Butyl paraben (ng/mL)
+URXEPB,Ethyl paraben  (ng/mL),Ethyl paraben  (ng/mL)
+URXMPB,Methyl paraben (ng/mL),Methyl paraben (ng/mL)
+URXPPB,Propyl paraben (ng/mL),Propyl paraben (ng/mL)
+KIQ191,prostate biopsy or surgery in last 4 wks,{Have you/Has SP} had a prostate biopsy or other prostate surgery in the last 4 weeks?
+KIQ282,Surgery for prostate cancer?,{Have you/Has SP} had surgery for prostate cancer?
+DMDBORN2,Country of Birth - Recode,In what country {were you/was SP} born?
+INDHHIN2,Annual household income,Total household income (reported as a range value in dollars)
+INDFMIN2,Annual family income,Total family income (reported as a range value in dollars)
+INQ020,Income from wages/salaries,"The next questions are about {your/your combined family} 
+  income.  When answering these questions, please remember that by 
+  {""income/combined family income""}, I mean {your income/your income plus the 
+  income of {NAMES OF OTHER NHANES FAMILY MEMBERS} for {LAST CALENDAR YEAR}.  
+  Did {you/you and OTHER NHANES FAMILY MEMBERS 16+} receive income in {LAST 
+  CALENDAR YEAR} from wages and salaries? [Did {you/you or OTHER FAMILY MEMBERS 
+  16+} get paid for work in {LAST CALENDAR YEAR}.]"
+INQ012,Income from self employment,"Did {you/you or any family members 16 and older} receive 
+  income in {LAST CALENDAR YEAR} from self-employment including business and 
+  farm income? [Self-employment means you worked for yourself.]"
+INQ030,Income from Social Security or RR,"When answering the next questions about different kinds of 
+  income members of your family might have received in {LAST CALENDAR YEAR}, 
+  please consider that we also want to know about family members less than 16 
+  years old.  Did {you/you or any family members living here, that is: you or 
+  NAME(S) OF OTHER NHANES FAMILY MEMBERS} receive income in {LAST CALENDAR YEAR} 
+  from Social Security or Railroad Retirement?"
+INQ060,Income from other disability pension,"Did {you/you or any family members living here} receive any 
+  disability pension [other than Social Security or Railroad Retirement] in 
+  {LAST CALENDAR YEAR}?"
+INQ080,Income from retirement/survivor pension,"Did {you/you or any family members living here} receive 
+  retirement or survivor pension [other than Social Security or Railroad 
+  Retirement or disability pension] in {LAST CALENDAR YEAR}?"
+INQ090,Income from Supplemental Security Income,"Did {you/you or any family members living here} receive 
+  Supplemental Security Income [SSI] in {LAST CALENDAR YEAR}?"
+IND235,Monthly family income,"Monthly family income (reported as a range value in 
+  dollars)."
+INDFMMPC,Family monthly poverty level category,Family monthly poverty level index categories.
+INQ244,Family has savings more than $5000,"Do {you/NAMES OF OTHER FAMILY/you and NAMES OF FAMILY MEMBERS} have more than $5,000 in savings at this time?  Please include money in your checking accounts."
+URXAAZ,Atrazine result (ug/L),Atrazine result (ug/L)
+URXDCZ,Diaminochloroatrazine result (ug/L),Diaminochloroatrazine result (ug/L)
+URXDTZ,Desethyl atrazine result (ug/L),Desethyl atrazine result (ug/L)
+URXSIS,Desisopropyl atrazine result (ug/L),Desisopropyl atrazine result (ug/L)
+URXSISM,Desisopropyl atrazine mercapturate(ug/L),Desisopropyl atrazine mercapturate (ug/L)
+LBDRBF,RBC folate (ng/mL),RBC Folate (ng/mL)
+LBXRBFSI,RBC folate (nmol/L),RBC folate (nmol/L)
+LBDFOL,Serum folate (ng/mL),Serum folate (ng/mL)
+LBXFOLSI,Serum folate (nmol/L),Serum folate (nmol/L)
+LBXSF1SI,5-Methyl-tetrahydrofolate (nmol/L),5-Methyl-tetrahydrofolate (nmol/L)
+LBXSF2SI,Folic acid (nmol/L),Folic acid (nmol/L)
+SSKLOTH,Klotho (pg/ml),Klotho (pg/ml)
+LBXTGN,Thyroglobulin (ng/mL),Thyroglobulin (ng/mL)
+LBDTGNSI,Thyroglobulin (ug/L),Thyroglobulin (ug/L)
+LBXV06,Blood Hexane (ng/mL),Blood Hexane (ng/mL)
+LBXBSE,Blood selenium (ug/L),Blood selenium(ug/L)
+LBDBSESI,Blood selenium (umol/L),Blood selenium (umol/L)
+LBDBSELC,Blood selenium comment code,Blood selenium comment code
+LBXBMN,Blood manganese (ug/L),Blood manganese (ug/L)
+LBDBMNSI,Blood manganese (nmol/L),Blood manganese (nmol/L)
+LBDBMNLC,Blood manganese comment code,Blood manganese comment code
+LBXSCU,Serum Copper (ug/dL),Serum Copper (ug/dL)
+LBDSCUSI,Serum Copper (umol/L),Serum Copper (umol/L)
+LBXSSE,Serum Selenium (ug/L),Serum Selenium (ug/L)
+LBDSSESI,Serum Selenium (umol/L),Serum Selenium (umol/L)
+LBXSZN,Serum Zinc (ug/dL),Serum Zinc (ug/dL)
+LBDSZNSI,Serum Zinc (umol/L),Serum Zinc (umol/L)
+LBXOL1,Oleic acid (18:1n-9) (umol/L),Oleic acid (18:1n-9) (umol/L)
+LBXEN1,Eicosenoic acid (20:1n-9) (umol/L),Eicosenoic acid (20:1n-9) (umol/L)
+LBXNR1,Nervonic acid (24:1n-9) (umol/L),Nervonic acid (24:1n-9) (umol/L)
+LBXLNA,Linoleic acid (18:2n-6) (umol/L),Linoleic acid (18:2n-6) (umol/L)
+LBDRFO,RBC folate (ng/mL),RBC folate (ng/mL)
+LBDFOTSI,Serum total folate (nmol/L),Serum total folate (nmol/L)
+LBDFOT,Serum total folate (ng/mL),Serum total folate (ng/mL)
+URXUMN,"Manganese, urine (ug/L)","Manganese, urine (ug/L)"
+URXUSN,"Tin, urine (ug/L)","Tin, urine (ug/L)"
+URXUSR,"Strontium, urine (ug/L)","Strontium, urine (ug/L)"
+HUQ051,#times receive healthcare over past year,"{During the past 12 months, how/How} many times {have you/has SP} seen a doctor or other health care professional about {your/his/her} health at a doctor's office, a clinic or some other place?  Do not include times {you were/s/he was} hospitalized overnight, visits to hospital emergency rooms, home visits or telephone calls."
+SMD460,# of people who live here smoke tobacco?,"Now I would like to ask you a few questions about smoking in this home.  How many people who live here smoke cigarettes, cigars, little cigars, pipes, water pipes, hookah, or any other tobacco product?"
+SMQ681,Smoked tobacco last 5 days?,"The following questions ask about use of tobacco products in the past 5 days.  During the past 5 days, including today, did you smoke cigarettes, pipes, cigars, little cigars or cigarillos, water pipes, hookahs, or e-cigarettes?"
+LBXBZAL,Benzaldehyde (ng/mL),Benzaldehyde (ng/mL)
+LBX4AL,Butyraldehyde (ng/mL),Butyraldehyde (ng/mL)
+LBXCRAL,Crotonaldehyde (ng/mL),Crotonaldehyde (ng/mL)
+LBX10AL,Decanaldehyde (ng/mL),Decanaldehyde (ng/mL)
+LBX7AL,Heptanaldehyde (ng/mL),Heptanaldehyde (ng/mL)
+LBX6AL,Hexanaldehyde (ng/mL),Hexanaldehyde (ng/mL)
+LBXI5AL,Isopentanaldehyde (ng/mL),Isopentanaldehyde (ng/mL)
+LBX8AL,Octanaldehyde (ng/mL),Octanaldehyde (ng/mL)
+LBXTLAL,o-Tolualdehyde (ng/mL),o-Tolualdehyde (ng/mL)
+LBX5AL,Pentanaldehyde (ng/mL),Pentanaldehyde (ng/mL)
+LBX3AL,Propanaldehyde (ng/mL),Propanaldehyde (ng/mL)
+URXCOTT,"Cotinine, urine (ng/mL)","Cotinine, urine (ng/mL)"
+URXHCTT,"Hydroxycotinine, urine (ng/mL)","Hydroxycotinine, urine (ng/mL)"
+URXANBT,"Anabasine, urine (ng/mL)","Anabasine, urine (ng/mL)"
+URXANTT,"Anatabine, urine (ng/mL)","Anatabine, urine (ng/mL)"
+URXCOXT,"Cotinine-N-oxide, urine (ng/mL)","Cotinine-N-oxide, urine (ng/mL)"
+URXNICT,"Nicotine, urine (ng/mL)","Nicotine, urine (ng/mL)"
+URXNNCT,"Nornicotine, urine (ng/mL)","Nornicotine, urine (ng/mL)"
+URXNOXT,"Nicotine 1'-Oxide, urine (ng/mL)","Nicotine 1'-Oxide, urine (ng/mL)"
+URDTNE2,TNE - 2 (nmol/mL),Total Nicotine Equivalents (TNE) - 2 (nmol/mL)
+URDTNE3,TNE - 3 (nmol/mL),Total Nicotine Equivalents (TNE) - 3 (nmol/mL)
+URDTNE6,TNE - 6 (nmol/mL),Total Nicotine Equivalents (TNE) - 6 (nmol/mL)
+VTQ231A,Moth balls or crystals?,"Do you currently use moth balls, moth crystals or toilet bowl deodorizers inside your home?"
+VTQ241A,Did you cook with natural gas?,"In the last 48 hours, did you cook or bake with natural gas?"
+VTQ241B,How long ago did you cook w natural gas?,"How long ago, in hours, did you cook or bake with natural gas?"
+VTQ244A,Did you pump gas in to your car?,"In the last 48 hours, did you pump gas into a car or other motor vehicle yourself?"
+VTQ244B,Long ago did you pump gas in your car?,"How long ago, in hours, did you pump gas into a car or other motor vehicle yourself?"
+VTQ265A,Spend 10+ minutes near cigarette smoke?,"In the last 48 hours, did you smoke or spend 10 minutes near a person who was smoking a cigarette, cigar, or pipe?"
+VTQ265B,Long since being near person smoking?,"How long ago, in hours, has it been since you smoked or spent 10 or more minutes near a person who was smoking a cigarette, cigar, or pipe?"
+VTQ271A,"In last 48 hrs, bathe for 5+ minutes?","In the last 48 hours, did you take a hot shower or bath for five minutes or longer?"
+VTQ271B,"How long, in hrs, since you bathed?","How long ago, in hours, has it been since your last shower or hot bath?"
+VTQ281A,In past 48 hrs breathe paint fumes?,"In the last 48 hours, did you breathe fumes from freshly painted indoor surfaces, paints, paint thinner, or varnish?"
+VTQ281B,"How long, since breathed paint fumes?","How long ago, in hours, has it been since you breathed fumes from freshly painted indoor surfaces, paints, paint thinner, or varnish?"
+VTQ281C,In past 48 hrs breathe diesel fumes?,"In the last 48 hours, did you breathe fumes from diesel fuel or kerosene?"
+VTQ281D,"How long, since breathed diesel fumes?","How long ago, in hours, has it been since you breathed fumes from diesel fuel or kerosene?"
+VTQ281E,Breathe fingernail polish fumes?,"In the last 48 hours, did you breathe fumes from fingernail polish?"
+VTQ281F,How long since breathed polish fumes?,"How long ago, in hours, has it been since you breathed fumes from fingernail polish?"
