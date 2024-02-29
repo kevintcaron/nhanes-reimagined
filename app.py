@@ -44,6 +44,8 @@ if st.session_state["authentication_status"]:
         st.session_state.selected_variable = None
 
     st.title('NHANES Weighted Data Explorer')
+    st.write('To provide feedback on this tool, please use our [Feedback Form](https://forms.office.com/g/2mqJRn0Paq)')
+
 
     # Create button for updating available variables
     if st.button('Update available variables'):
@@ -161,6 +163,8 @@ if st.session_state["authentication_status"]:
                     st.write('No analysis selected')
             except Exception as e:
                 st.error(f"An error occurred: {e}")
+
+
 
     st.markdown(
         """

@@ -12,6 +12,14 @@ credentials:
       email: wrn0@cdc.gov
       name: NHANES Admin
       password: $2b$12$v0u6jg.nkj.AcKCStlAV4.gM78tDW.wvrbIZ7NNRHMyctm5b6yFcq # To be replaced with hashed password 'biomarker'
+    dls:
+      email: wrn0@cdc.gov
+      name: DLS Team
+      password: $2b$12$RL6lgDNef/iBGUB5EGidaO.rXqF2f/JwPE8I1DMVpfWuX1hJRXJFq # To be replaced with hashed password 'chamblee'
+    dhnes:
+      email: wrn0@cdc.gov
+      name: DHNES Admin
+      password: $2b$12$xOiuo85zLlQqTK/xVT6QX.zMi75031END2HRsrBvwsG6jj46I4lSO # To be replaced with hashed password 'hyattsville'
 cookie:
   expiry_days: 0
   key: random_signature_key # Must be string
