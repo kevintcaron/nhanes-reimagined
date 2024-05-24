@@ -355,8 +355,8 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
         df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
         min_val = min(unweighted_df[variable][~np.isnan(unweighted_df[variable])])
         df['Approx. LOD'] = min_val * np.sqrt(2)
-        prop_ = len(unweighted_df[unweighted_df[variable] > min_val]) / sum(~np.isnan(unweighted_df[variable]))
-        df['Proportion > LOD'] = prop_
+        weighted_prop_ = sum(unweighted_df[weight][unweighted_df[variable] > min_val]) / sum(unweighted_df[weight][~np.isnan(unweighted_df[variable])])
+        df['Weighted Proportion > LOD'] = weighted_prop_
 
 
     else:
