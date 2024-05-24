@@ -211,6 +211,13 @@ def get_means(df_all, variable, mean_type, domain, max_value, min_value):
     domain = get_domain(domain)
     df_all = recode_df_domains(df_all)
 
+    # checks for case where user entered a min/max value and then removed it
+    if max_value == '':
+        max_value = None
+        
+    if min_value == '':
+        min_value = None
+
     if max_value is None:
         pass
     else:
@@ -299,7 +306,7 @@ def get_amean(unweighted_df, variable, weight, domain=None, max_value=None, min_
     df = var_prop.to_dataframe()
 
     df = format_means(df, unweighted_df, domain, 'Arithmetic')
-
+    df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
     return df
 
 
@@ -334,7 +341,7 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
                           stratum=unweighted_df["SDMVSTRA"],
                           psu=unweighted_df["SDMVPSU"],
                           domain=unweighted_df[domain],
-                          remove_nan=True)
+                          remove_nan=True)    
 
     df = var_prop.to_dataframe()
     df['_estimate'] = np.e ** df['_estimate']
@@ -343,6 +350,21 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
 
     df = format_means(df, unweighted_df, domain, 'Geometric')
 
+    # determine the number of observations for the table row entry
+    if domain == None:
+        df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
+        min_val = min(unweighted_df[variable][~np.isnan(unweighted_df[variable])])
+        df['Approx. LOD'] = min_val * np.sqrt(2)
+        prop_ = len(unweighted_df[unweighted_df[variable] > min_val]) / sum(~np.isnan(unweighted_df[variable]))
+        df['Proportion > LOD'] = prop_
+
+
+    else:
+        n_container = []
+        for d in df['Category']:
+            n_container.append(sum(~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])))
+        df['Sample Size'] = n_container
+            
     return df
 
 
