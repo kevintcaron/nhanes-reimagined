@@ -19,8 +19,8 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-authenticator.login('Login', 'main')
-
+# authenticator.login('Login', 'main')
+authenticator.login()
 
 name = st.session_state['name']
 authentication_status = st.session_state['authentication_status']
