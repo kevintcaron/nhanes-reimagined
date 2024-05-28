@@ -9,6 +9,11 @@ from yaml.loader import SafeLoader
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+# page configuration
+st.set_page_config(
+    page_title="NHANES Reimagined",
+)
+
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
@@ -170,7 +175,6 @@ if st.session_state["authentication_status"]:
                 st.error(f"An error occurred: {e}")
 
 
-
     st.markdown(
         """
         <style>
@@ -183,6 +187,7 @@ if st.session_state["authentication_status"]:
                 text-align: center;
                 padding: 10px;
                 font-size: 12px;
+                color: black;
             }
         </style>
         <div class="footer">

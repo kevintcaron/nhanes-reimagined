@@ -362,6 +362,7 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
     else:
         n_container = []
         prop_container = []
+        llod_container = []
         for d in df['_domain']:
             min_val_domain = min(unweighted_df[unweighted_df[domain] == d][variable][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])])
             n_container.append(sum(~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])))
@@ -369,9 +370,12 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
                 sum(unweighted_df[unweighted_df[domain] == d][weight][unweighted_df[unweighted_df[domain] == d][variable] > min_val_domain]) / # numerator calc
                 sum(unweighted_df[unweighted_df[domain] == d][weight][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])]) # denominator calc
                 ) 
+            llod_container.append(min_val_domain * np.sqrt(2))
+            
 
         df['Sample Size'] = n_container
         df['Weighted Proportion > LOD'] = prop_container
+        df['Approx. LOD'] = llod_container
     
     return format_means(df, unweighted_df, domain, 'Geometric')
 
@@ -384,6 +388,7 @@ def format_means(df, unweighted_df, domain, mean):
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
         df['Category'] = 'Total Population'
+        
         for i in range(len(df)):
             if df.loc[i, 'Weighted Proportion > LOD'] >= weighted_thresh:
                 df.loc[i, 'Mean'] = f"{round(df.loc[i, 'Mean'], 3)} ({round(df.loc[i, 'lower_95%CI'], 3)} - {round(df.loc[i, 'upper_95%CI'], 3)})"
