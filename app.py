@@ -4,9 +4,10 @@ from utils import *
 import time
 import plotly.express as px
 import streamlit_authenticator as stauth
-
 import yaml
 from yaml.loader import SafeLoader
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -128,7 +129,11 @@ if st.session_state["authentication_status"]:
                     st.write(
                         f'{easy_name} {selected_mean} Means by {selected_domain} (Min: {selected_min}, Max: {selected_max})')
 
-                    st.dataframe(df_means, hide_index=True)
+                    st.dataframe(df_means, hide_index=True, use_container_width=True)
+                    # display footer notes
+                    if '*' in set(df_means['Mean']):
+                        st.write(r"\* Not calculated: Proportion of results below limit of detection was too high to provide a valid result.")
+
                 elif selected_analysis == 'Compare Histograms':
                     with st.spinner('Creating Histograms...'):
                         utils.compare_frequency(multi_yr_df,
