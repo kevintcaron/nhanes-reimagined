@@ -8,6 +8,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from math import ceil
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 def get_vars():
@@ -211,6 +213,13 @@ def get_means(df_all, variable, mean_type, domain, max_value, min_value):
     domain = get_domain(domain)
     df_all = recode_df_domains(df_all)
 
+    # checks for case where user entered a min/max value and then removed it
+    if max_value == '':
+        max_value = None
+        
+    if min_value == '':
+        min_value = None
+
     if max_value is None:
         pass
     else:
@@ -298,9 +307,30 @@ def get_amean(unweighted_df, variable, weight, domain=None, max_value=None, min_
 
     df = var_prop.to_dataframe()
 
-    df = format_means(df, unweighted_df, domain, 'Arithmetic')
+    # df = format_means(df, unweighted_df, domain, 'Arithmetic')
+    # df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
+    if domain == None:
+        df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
+        min_val = min(unweighted_df[variable][~np.isnan(unweighted_df[variable])])
+        df['Approx. LOD'] = min_val #* np.sqrt(2)
+        weighted_prop_ = sum(unweighted_df[weight][unweighted_df[variable] > min_val]) / sum(unweighted_df[weight][~np.isnan(unweighted_df[variable])])
+        df['Weighted Proportion > LOD'] = weighted_prop_
 
-    return df
+
+    else:
+        n_container = []
+        prop_container = []
+        for d in df['_domain']:
+            min_val_domain = min(unweighted_df[unweighted_df[domain] == d][variable][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])])
+            n_container.append(sum(~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])))
+            prop_container.append(
+                sum(unweighted_df[unweighted_df[domain] == d][weight][unweighted_df[unweighted_df[domain] == d][variable] > min_val_domain]) / # numerator calc
+                sum(unweighted_df[unweighted_df[domain] == d][weight][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])]) # denominator calc
+                ) 
+
+        df['Sample Size'] = n_container
+        df['Weighted Proportion > LOD'] = prop_container
+    return format_means(df, unweighted_df, domain, 'Arithmetic')
 
 
 def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, min_value=None):
@@ -334,40 +364,74 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
                           stratum=unweighted_df["SDMVSTRA"],
                           psu=unweighted_df["SDMVPSU"],
                           domain=unweighted_df[domain],
-                          remove_nan=True)
+                          remove_nan=True)    
 
     df = var_prop.to_dataframe()
     df['_estimate'] = np.e ** df['_estimate']
     df['_lci'] = np.e ** df['_lci']
     df['_uci'] = np.e ** df['_uci']
 
-    df = format_means(df, unweighted_df, domain, 'Geometric')
+    # determine the number of observations for the table row entry
+    if domain == None:
+        df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
+        min_val = min(unweighted_df[variable][~np.isnan(unweighted_df[variable])])
+        df['Approx. LOD'] = min_val * np.sqrt(2)
+        weighted_prop_ = sum(unweighted_df[weight][unweighted_df[variable] > min_val]) / sum(unweighted_df[weight][~np.isnan(unweighted_df[variable])])
+        df['Weighted Proportion > LOD'] = weighted_prop_
 
-    return df
+
+    else:
+        n_container = []
+        prop_container = []
+        for d in df['_domain']:
+            min_val_domain = min(unweighted_df[unweighted_df[domain] == d][variable][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])])
+            n_container.append(sum(~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])))
+            prop_container.append(
+                sum(unweighted_df[unweighted_df[domain] == d][weight][unweighted_df[unweighted_df[domain] == d][variable] > min_val_domain]) / # numerator calc
+                sum(unweighted_df[unweighted_df[domain] == d][weight][~np.isnan(unweighted_df[unweighted_df[domain] == d][variable])]) # denominator calc
+                ) 
+
+        df['Sample Size'] = n_container
+        df['Weighted Proportion > LOD'] = prop_container
+    
+    return format_means(df, unweighted_df, domain, 'Geometric')
 
 
 def format_means(df, unweighted_df, domain, mean):
+    weighted_thresh = 0.6
+    
     if domain == None:
-        df.rename(columns={"_estimate": "Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI"}, inplace=True)
+        df.rename(columns={"_estimate": "Mean (95%)", "_lci": "lower_95%CI", "_uci": "upper_95%CI"}, inplace=True)
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
-        df['Category'] = 'Total Population'
-        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', 'Weights']]
+        df['Category'] = 'Total Population'     
+        for i in range(len(df)):
+            if df.loc[i, 'Weighted Proportion > LOD'] >= weighted_thresh:
+                df.loc[i, 'Mean'] = f"{round(df.loc[i, 'Mean'], 3)} ({round(df.loc[i, 'lower_95%CI'], 3)} - {round(df.loc[i, 'upper_95%CI'], 3)})"
+
+            else:
+                df.loc[i, 'Mean'] = '*'
+                df.loc[i, 'lower_95%CI'] = '*'
+                df.loc[i, 'upper_95%CI'] = '*'
+        
+        return df[['Category', 'Year', 'Mean', 'Weights', 'Sample Size']]
+        
     else:
         df.rename(columns={"_estimate": "Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI", "_domain": "Category"},
                   inplace=True)
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
-        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', 'Weights']]
+ 
+        for i in range(len(df)):
+            if df.loc[i, 'Weighted Proportion > LOD'] >= weighted_thresh:
+                df.loc[i, 'Mean'] = f"{round(df.loc[i, 'Mean'], 3)} ({round(df.loc[i, 'lower_95%CI'], 3)} - {round(df.loc[i, 'upper_95%CI'], 3)})"
 
-    df.loc[:, 'Mean'] = df['Mean'].round(3)
-    df.loc[:, 'lower_95%CI'] = df['lower_95%CI'].round(3)
-    df.loc[:, 'upper_95%CI'] = df['upper_95%CI'].round(3)
+            else:
+                df.loc[i, 'Mean'] = '*'
+                df.loc[i, 'lower_95%CI'] = '*'
+                df.loc[i, 'upper_95%CI'] = '*'
 
-    #     column_names = pd.MultiIndex.from_tuples([('', 'Category'), ('Survey', 'Years'), (mean, 'Mean'),("Lower", "95%CI"), ("Upper", "95%CI"), ('', 'Weights')])
-    #     df.columns = column_names
-
-    return df
+        return df[['Category', 'Year', 'Mean', 'Weights', 'Sample Size']]
 
 
 def get_domain(domain_name):
