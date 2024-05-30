@@ -401,7 +401,7 @@ def format_means(df, unweighted_df, domain, mean):
     weighted_thresh = 0.6
     
     if domain == None:
-        df.rename(columns={"_estimate": "Mean (95%)", "_lci": "lower_95%CI", "_uci": "upper_95%CI"}, inplace=True)
+        df.rename(columns={"_estimate": "Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI"}, inplace=True)
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
         df['Category'] = 'Total Population'     
