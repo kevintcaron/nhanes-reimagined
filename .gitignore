@@ -27,3 +27,5 @@ __pycache__/*.pyo
 *.pyc
 *.xml
 .gitattributes
+
+temp_data/
