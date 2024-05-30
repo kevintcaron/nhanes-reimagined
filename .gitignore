@@ -29,4 +29,4 @@ __pycache__/*.pyo
 .gitattributes
 
 # Ignore temp_data file for now
-.temp_data
+.temp_data/
