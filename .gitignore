@@ -28,8 +28,5 @@ __pycache__/*.pyo
 *.xml
 .gitattributes
 
-<<<<<<< HEAD
-=======
 # Ignore temp_data file for now
->>>>>>> e6c6c4bd412944d1d2a3be344ea7f79d1f5cc161
 temp_data/
