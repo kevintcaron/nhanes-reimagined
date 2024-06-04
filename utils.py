@@ -297,7 +297,7 @@ def get_amean(unweighted_df, variable, weight, domain=None, max_value=None, min_
                           remove_nan=True)
 
     df = var_prop.to_dataframe()
-
+    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain, max_value=None, min_value=None)
     df = format_means(df, unweighted_df, domain, 'Arithmetic')
 
     return df
@@ -320,6 +320,7 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
         unweighted_df = handle_max_min(unweighted_df, variable, max_value, min_value)
 
     var_prop = TaylorEstimator("mean")
+    biomarker_stratified_proportion = TaylorEstimator("proportion")
 
     if domain == None:
         var_prop.estimate(y=np.log(unweighted_df[variable]),
@@ -341,10 +342,85 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
     df['_lci'] = np.e ** df['_lci']
     df['_uci'] = np.e ** df['_uci']
 
+    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain, max_value=None, min_value=None)
     df = format_means(df, unweighted_df, domain, 'Geometric')
 
     return df
 
+
+def get_percentiles(df, unweighted_df, variable, weight, domain=None, max_value=None, min_value=None):
+    if max_value is not None or min_value is not None:
+        unweighted_df = handle_max_min(unweighted_df, variable, max_value, min_value)
+
+    biomarker_stratified_proportion = TaylorEstimator("proportion")
+
+    if domain == None:
+        biomarker_stratified_proportion.estimate(
+            y=unweighted_df[variable],
+            samp_weight=unweighted_df[weight],
+            stratum=unweighted_df["SDMVSTRA"],
+            psu=unweighted_df["SDMVPSU"],
+            remove_nan=True)
+
+        df_props = biomarker_stratified_proportion.to_dataframe()
+        df_props['cumulative'] = df_props['_estimate'].cumsum()
+
+        quantiles = [0.95, 0.90, 0.75, 0.50]
+        pcntl_ests = []
+
+        for quantile in quantiles:
+            for i in range(len(df_props)):
+                if df_props['cumulative'][i] >= quantile:
+                    pcntl_ests.append(df_props['_level'][i])
+                    break
+
+        df['50th Percentile'] = pcntl_ests[3].round(3)
+        df['75th Percentile'] = pcntl_ests[2].round(3)
+        df['90th Percentile'] = pcntl_ests[1].round(3)
+        df['95th Percentile'] = pcntl_ests[0].round(3)
+
+    else:
+        biomarker_stratified_proportion.estimate(
+            y=unweighted_df[variable],
+            samp_weight=unweighted_df[weight],
+            stratum=unweighted_df["SDMVSTRA"],
+            psu=unweighted_df["SDMVPSU"],
+            domain=unweighted_df[domain],
+            remove_nan=True)
+
+        df_props = biomarker_stratified_proportion.to_dataframe()
+
+        pctl_ests_list = []
+        for d in df_props['_domain'].unique():
+            grp = df_props.copy()
+            grp = grp[grp['_domain'] == d]
+            grp['cumulative'] = grp['_estimate'].cumsum()
+            grp.reset_index(inplace=True)
+
+            quantiles = [0.95, 0.90, 0.75, 0.50]
+            pcntl_ests = []
+
+            for quantile in quantiles:
+                for i in range(len(grp)):
+                    if grp['cumulative'][i] >= quantile:
+                        pcntl_ests.append(grp['_level'][i])
+                        break
+
+            pctl_ests_list.append(pcntl_ests)
+
+        percentiles = {50: [], 75: [], 90: [], 95: []}
+        for d in range(len(df_props['_domain'].unique())):
+            percentiles[50].append(pctl_ests_list[d][3])
+            percentiles[75].append(pctl_ests_list[d][2])
+            percentiles[90].append(pctl_ests_list[d][1])
+            percentiles[95].append(pctl_ests_list[d][0])
+
+        df['50th Percentile'] = percentiles[50]
+        df['75th Percentile'] = percentiles[75]
+        df['90th Percentile'] = percentiles[90]
+        df['95th Percentile'] = percentiles[95]
+
+    return df
 
 def format_means(df, unweighted_df, domain, mean):
     if domain == None:
@@ -352,13 +428,13 @@ def format_means(df, unweighted_df, domain, mean):
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
         df['Category'] = 'Total Population'
-        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', 'Weights']]
+        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', '50th Percentile','75th Percentile', '90th Percentile', '95th Percentile','Weights']]
     else:
         df.rename(columns={"_estimate": "Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI", "_domain": "Category"},
                   inplace=True)
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
-        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', 'Weights']]
+        df = df[['Category', 'Year', 'Mean', 'lower_95%CI', 'upper_95%CI', '50th Percentile','75th Percentile', '90th Percentile', '95th Percentile','Weights']]
 
     df.loc[:, 'Mean'] = df['Mean'].round(3)
     df.loc[:, 'lower_95%CI'] = df['lower_95%CI'].round(3)
