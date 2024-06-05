@@ -308,7 +308,7 @@ def get_amean(unweighted_df, variable, weight, domain=None, max_value=None, min_
                           remove_nan=True)
 
     df = var_prop.to_dataframe()
-    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain, max_value=max_value, min_value=min_value)
+    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain)
 
     if domain == None:
         df['Sample Size'] = sum(~np.isnan(unweighted_df[variable]))
@@ -375,7 +375,7 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
     df['_lci'] = np.e ** df['_lci']
     df['_uci'] = np.e ** df['_uci']
 
-    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain, max_value=max_value, min_value=min_value)
+    df = get_percentiles(df, unweighted_df, variable, weight, domain=domain)
 
     # determine the number of observations for the table row entry
     if domain == None:
@@ -406,9 +406,7 @@ def get_geomean(unweighted_df, variable, weight, domain=None, max_value=None, mi
     return format_means(df, unweighted_df, domain, 'Geometric')
 
 
-def get_percentiles(df, unweighted_df, variable, weight, domain=None, max_value=None, min_value=None):
-    if max_value is not None or min_value is not None:
-        unweighted_df = handle_max_min(unweighted_df, variable, max_value, min_value)
+def get_percentiles(df, unweighted_df, variable, weight, domain=None):
 
     biomarker_stratified_proportion = TaylorEstimator("proportion")
 
