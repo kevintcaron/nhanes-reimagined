@@ -25,8 +25,8 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-# authenticator.login('Login', 'main')
-authenticator.login()
+authenticator.login('Login', 'main')
+# authenticator.login()
 
 name = st.session_state['name']
 authentication_status = st.session_state['authentication_status']
@@ -130,13 +130,14 @@ if st.session_state["authentication_status"]:
                                                selected_mean,
                                                domain=selected_domain,
                                                max_value=selected_max,
-                                               min_value=selected_min)
+                                               min_value=selected_min,
+                                               purpose='summary statistics')
                     st.write(
                         f'{easy_name} {selected_mean} Means by {selected_domain} (Min: {selected_min}, Max: {selected_max})')
 
                     st.dataframe(df_means, hide_index=True, use_container_width=True)
                     # display footer notes
-                    if '*' in set(df_means['Mean']):
+                    if '*' in set(df_means[f'{selected_mean} Mean']):
                         st.write(r"\* Not calculated: Proportion of results below limit of detection was too high to provide a valid result.")
 
                 elif selected_analysis == 'Compare Histograms':
@@ -156,17 +157,18 @@ if st.session_state["authentication_status"]:
                                                selected_mean,
                                                domain=selected_domain,
                                                max_value=selected_max,
-                                               min_value=selected_min)
+                                               min_value=selected_min,
+                                               purpose='line graph')
 
                     # Create graph of df_means with Year as x-axis and Mean as y-axis
-                    fig = px.line(df_means, x='Year', y='Mean', color='Category')
+                    fig = px.line(df_means, x='Year', y=f'{selected_mean} Mean', color='Category')
                     # Add title and axis labels
                     fig.update_layout(title=f'{easy_name} {selected_mean} Means by {selected_domain}',
                                       xaxis_title='Year',
                                       yaxis_title=f'{easy_name}')
                     # Add upper and lower 95% confidence intervals as whiskers
-                    fig.update_traces(error_y=dict(type='data', array=df_means['upper_95%CI'] - df_means['Mean'],
-                                                   arrayminus=df_means['Mean'] - df_means['lower_95%CI']))
+                    fig.update_traces(error_y=dict(type='data', array=df_means['upper_95%CI'] - df_means[f'{selected_mean} Mean'],
+                                                   arrayminus=df_means[f'{selected_mean} Mean'] - df_means['lower_95%CI']))
                     # Add upper and lower 95% confidence intervals as error bars
                     st.plotly_chart(fig)
                 else:
