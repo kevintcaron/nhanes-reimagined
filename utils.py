@@ -495,6 +495,7 @@ def format_means(df, unweighted_df, domain, mean, purpose=None):
             df = df[['Category', 'Year', f'{mean} Mean', 'lower_95%CI', 'upper_95%CI', 'Weights', 'Sample Size', 'Weighted Proportion > LOD']]
         else:
             df = df[['Category', 'Year', f'{mean} Mean', 'lower_95%CI', 'upper_95%CI', '50th Percentile', '75th Percentile', '90th Percentile', '95th Percentile', 'Weights', 'Sample Size', 'Weighted Proportion > LOD']]
+        df = df.copy()
         df['Category'] = 'Total Population'
 
         if purpose != 'line graph':
@@ -514,7 +515,7 @@ def format_means(df, unweighted_df, domain, mean, purpose=None):
         return df
 
     else:
-        df.rename(columns={"_estimate": "Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI", "_domain": "Category"},
+        df.rename(columns={"_estimate": f"{mean} Mean", "_lci": "lower_95%CI", "_uci": "upper_95%CI", "_domain": "Category"},
                   inplace=True)
         df['Weights'] = unweighted_df['Weights'][0]
         df['Year'] = unweighted_df['Year'][0]
