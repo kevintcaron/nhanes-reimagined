@@ -10,6 +10,7 @@ from matplotlib.patches import Rectangle
 from math import ceil
 import warnings
 
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
@@ -768,6 +769,40 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
     plt.tight_layout()
     st.pyplot(fig)
 
+def plot_total_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
+    bins = int(bins)
+    limit = float(limit)
+    w_df = get_weighted_df(df, variable, weight, domain)
+    
+    a = w_df['_level'].to_list()
+    fig, ax = plt.subplots()
+
+    if log == True:
+        ax.hist(w_df['_level'],
+                weights=w_df['_estimate'] * 100,
+                bins=np.logspace(np.log10(np.nanmin(a)), np.log10(np.nanmax(a)), bins + 1),
+                edgecolor='black')
+        scale = rescale_x(a)
+
+        # Rescale x axis, set tick locations, and set x tick labels
+        ax.set_xscale("log")
+        ax.set_xticks(scale)
+        ax.set_xticklabels(scale)
+
+    else:
+        ax.hist(w_df['_level'],
+                        weights=w_df['_estimate'] * 100,
+                        bins=np.linspace(np.nanmin(a), np.nanmax(a), bins + 1),
+                        edgecolor='black')
+    
+    ax.set_title(
+        'Frequency Distribution of\n' + 'Total Population' + ' ' + str(easy_name) + '\n— NHANES ' + str(year))
+    ax.set_xlabel(easy_name)
+    ax.set_ylabel('Percent of Population')
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
 
 def compare_frequency(df_all,
                       easy_name,
@@ -793,7 +828,9 @@ def compare_frequency(df_all,
     domain = get_domain(Domain)
 
     if Domain == 'Total Population':
-        st.write('Sorry: "Total Population" is not currently supported. Please try another example.')
+        plot_total_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
+        #st.write('Sorry: "Total Population" is not currently supported. Please try another example.')
+        
     else:
         try:
             if Upper_Limit == 0.0:
