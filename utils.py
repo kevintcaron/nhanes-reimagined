@@ -650,7 +650,19 @@ def rescale_x(a):
 def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
     bins = int(bins)
     limit = float(limit)
-    w_df = get_weighted_df(df, variable, weight, domain)
+
+    # checking weights to get available for that year, default to weight param if present
+    weights = list(set(df[df['Year'] == year]['Weights']))
+
+    selected_weight = ''
+    if weight in weights:
+        selected_weight = weight
+    elif len(weights) == 1:
+        selected_weight = weights[0]
+    else:
+        print(f"Multiple Weights: {weights}")
+
+    w_df = get_weighted_df(df, variable, selected_weight, domain)
 
     num_plots = len(w_df['_domain'].unique())
     rows = ceil(num_plots / 2)
@@ -750,7 +762,7 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 
             # Create Title and x/y labels
             axes[col].set_title(
-                'Frequency Distribution of\n' + str(domains[i]) + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+                'Frequency Distribution of\n' + str(domains[i]) + ' ' + str(x_label) + '\n— NHANES ' + str(year) + '\nSelected Weights: ' + str(selected_weight))
             axes[col].set_xlabel(x_label)
             axes[col].set_ylabel('Percent of Population')
             axes[col].tick_params('x', labelbottom=True)
@@ -772,7 +784,19 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 def plot_total_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
     bins = int(bins)
     limit = float(limit)
-    w_df = get_weighted_df(df, variable, weight, domain)
+
+    # checking weights to get available for that year, default to WTMEC2YR if present
+    weights = list(set(df[df['Year'] == year]['Weights']))
+
+    selected_weight = ''
+    if weight in weights:
+        selected_weight = weight
+    elif len(weights) == 1:
+        selected_weight = weights[0]
+    else:
+        print(f"Multiple Weights: {weights}")
+
+    w_df = get_weighted_df(df, variable, selected_weight, domain)
     
     a = w_df['_level'].to_list()
     fig, ax = plt.subplots()
@@ -796,10 +820,10 @@ def plot_total_dist(df, variable, easy_name, year, weight, domain, bins, log, li
                         edgecolor='black')
     
     ax.set_title(
-        'Frequency Distribution of\n' + 'Total Population' + ' ' + str(easy_name) + '\n— NHANES ' + str(year))
+        'Frequency Distribution of\n' + 'Total Population' + ' ' + str(easy_name) + '\n— NHANES ' + str(year) + ', Selected Weights: ' + str(selected_weight))
     ax.set_xlabel(easy_name)
     ax.set_ylabel('Percent of Population')
-
+    
     plt.tight_layout()
     st.pyplot(fig)
 
@@ -829,7 +853,6 @@ def compare_frequency(df_all,
 
     if Domain == 'Total Population':
         plot_total_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
-        #st.write('Sorry: "Total Population" is not currently supported. Please try another example.')
         
     else:
         try:
