@@ -10,6 +10,7 @@ from matplotlib.patches import Rectangle
 from math import ceil
 import warnings
 
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
@@ -616,7 +617,7 @@ def get_weighted_df(unweighted_df, variable, weight, domain=None):
     df of % of population at each unique value of selected variable
     """
     var_prop = TaylorEstimator("proportion")
-
+    
     if domain == None:
         var_prop.estimate(y=unweighted_df[variable],
                           samp_weight=unweighted_df[weight],
@@ -649,7 +650,22 @@ def rescale_x(a):
 def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
     bins = int(bins)
     limit = float(limit)
-    w_df = get_weighted_df(df, variable, weight, domain)
+
+    # checking weights to get available for that year, default to weight param if present
+    weights = list(set(df[df['Year'] == year]['Weights']))
+
+    selected_weight = ''
+    if weight in weights:
+        selected_weight = weight
+    elif len(weights) == 1:
+        selected_weight = weights[0]
+    else:
+        # we can make this more dynamic if we deem it worthwhile, but this will prevent errors
+        selected_weight = weights[0]
+        df = df[df['Weights'] == selected_weight]
+        
+
+    w_df = get_weighted_df(df, variable, selected_weight, domain)
 
     num_plots = len(w_df['_domain'].unique())
     rows = ceil(num_plots / 2)
@@ -701,7 +717,7 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 
             # Create Title and x/y labels
             axes[row, col].set_title(
-                'Frequency Distribution of\n' + domains[i] + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+                'Frequency Distribution of\n' + domains[i] + ' ' + str(x_label) + '\n— NHANES ' + str(year) + '\nSelected Weights: ' + str(selected_weight))
             axes[row, col].set_xlabel(x_label)
             axes[row, col].set_ylabel('Percent of Population')
             axes[row, col].tick_params('x', labelbottom=True)
@@ -749,7 +765,7 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 
             # Create Title and x/y labels
             axes[col].set_title(
-                'Frequency Distribution of\n' + str(domains[i]) + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+                'Frequency Distribution of\n' + str(domains[i]) + ' ' + str(x_label) + '\n— NHANES ' + str(year) + '\nSelected Weights: ' + str(selected_weight))
             axes[col].set_xlabel(x_label)
             axes[col].set_ylabel('Percent of Population')
             axes[col].tick_params('x', labelbottom=True)
@@ -765,6 +781,56 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
             if i > num_plots:
                 axes[col].remove()
 
+    plt.tight_layout()
+    st.pyplot(fig)
+
+def plot_total_dist(df, variable, easy_name, year, weight, domain, bins, log, limit):
+    bins = int(bins)
+    limit = float(limit)
+
+    # checking weights to get available for that year, default to WTMEC2YR if present
+    weights = list(set(df[df['Year'] == year]['Weights']))
+
+    selected_weight = ''
+    if weight in weights:
+        selected_weight = weight
+    elif len(weights) == 1:
+        selected_weight = weights[0]
+    else:
+        # we can make this more dynamic if we deem it worthwhile, but this will prevent errors
+        selected_weight = weights[0]
+        df = df[df['Weights'] == selected_weight]
+        
+        
+
+    w_df = get_weighted_df(df, variable, selected_weight, domain)
+    
+    a = w_df['_level'].to_list()
+    fig, ax = plt.subplots()
+
+    if log == True:
+        ax.hist(w_df['_level'],
+                weights=w_df['_estimate'] * 100,
+                bins=np.logspace(np.log10(np.nanmin(a)), np.log10(np.nanmax(a)), bins + 1),
+                edgecolor='black')
+        scale = rescale_x(a)
+
+        # Rescale x axis, set tick locations, and set x tick labels
+        ax.set_xscale("log")
+        ax.set_xticks(scale)
+        ax.set_xticklabels(scale)
+
+    else:
+        ax.hist(w_df['_level'],
+                        weights=w_df['_estimate'] * 100,
+                        bins=np.linspace(np.nanmin(a), np.nanmax(a), bins + 1),
+                        edgecolor='black')
+    
+    ax.set_title(
+        'Frequency Distribution of\n' + 'Total Population' + ' ' + str(easy_name) + '\n— NHANES ' + str(year) + ', Selected Weights: ' + str(selected_weight))
+    ax.set_xlabel(easy_name)
+    ax.set_ylabel('Percent of Population')
+    
     plt.tight_layout()
     st.pyplot(fig)
 
@@ -793,7 +859,8 @@ def compare_frequency(df_all,
     domain = get_domain(Domain)
 
     if Domain == 'Total Population':
-        st.write('Sorry: "Total Population" is not currently supported. Please try another example.')
+        plot_total_dist(df, Variable, easy_name, Year, Weights, domain, Bins, Log, Lower_Limit)
+        
     else:
         try:
             if Upper_Limit == 0.0:
