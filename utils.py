@@ -617,7 +617,7 @@ def get_weighted_df(unweighted_df, variable, weight, domain=None):
     df of % of population at each unique value of selected variable
     """
     var_prop = TaylorEstimator("proportion")
-
+    
     if domain == None:
         var_prop.estimate(y=unweighted_df[variable],
                           samp_weight=unweighted_df[weight],
@@ -660,7 +660,10 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
     elif len(weights) == 1:
         selected_weight = weights[0]
     else:
-        print(f"Multiple Weights: {weights}")
+        # we can make this more dynamic if we deem it worthwhile, but this will prevent errors
+        selected_weight = weights[0]
+        df = df[df['Weights'] == selected_weight]
+        
 
     w_df = get_weighted_df(df, variable, selected_weight, domain)
 
@@ -714,7 +717,7 @@ def plot_domain_dist(df, variable, easy_name, year, weight, domain, bins, log, l
 
             # Create Title and x/y labels
             axes[row, col].set_title(
-                'Frequency Distribution of\n' + domains[i] + ' ' + str(x_label) + '\n— NHANES ' + str(year))
+                'Frequency Distribution of\n' + domains[i] + ' ' + str(x_label) + '\n— NHANES ' + str(year) + '\nSelected Weights: ' + str(selected_weight))
             axes[row, col].set_xlabel(x_label)
             axes[row, col].set_ylabel('Percent of Population')
             axes[row, col].tick_params('x', labelbottom=True)
@@ -794,7 +797,11 @@ def plot_total_dist(df, variable, easy_name, year, weight, domain, bins, log, li
     elif len(weights) == 1:
         selected_weight = weights[0]
     else:
-        print(f"Multiple Weights: {weights}")
+        # we can make this more dynamic if we deem it worthwhile, but this will prevent errors
+        selected_weight = weights[0]
+        df = df[df['Weights'] == selected_weight]
+        
+        
 
     w_df = get_weighted_df(df, variable, selected_weight, domain)
     
