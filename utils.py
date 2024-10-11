@@ -161,6 +161,10 @@ def choose_weights(data_file, data_df, demo_df):
 
 # Get single year data
 def get_single_yr_df(var, year, data_file, demo_file):
+    # Handle issue with file path for 08/2021-08/2023 data
+    if year == '2021-2023':
+        year = '2021-2022'
+
     data_url = 'https://wwwn.cdc.gov/Nchs/Nhanes/' + year + '/' + data_file + '.XPT'
     demo_url = 'https://wwwn.cdc.gov/Nchs/Nhanes/' + year + '/' + demo_file + '.XPT'
     data_df = pd.read_sas(data_url)
@@ -172,6 +176,9 @@ def get_single_yr_df(var, year, data_file, demo_file):
     # Handle Pandemic
     if data_file.startswith('P_'):
         merged_df['Year'] = '2017-2020 Pre-Pandemic'
+    # Fix 08/2021-08/2023 path name issue - return to correct dates
+    elif year == '2021-2022':
+        merged_df['Year'] = '2021-2023'
     else:
         merged_df['Year'] = year
 
